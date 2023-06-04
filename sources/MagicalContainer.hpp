@@ -25,6 +25,11 @@ namespace ariel {
         int size() const;
         std::vector<int> getElements() const;
 
+        MagicalContainer(const MagicalContainer& other) = default;
+        MagicalContainer& operator=(const MagicalContainer& other) = default;
+        MagicalContainer(MagicalContainer&& other) = default;
+        MagicalContainer& operator=(MagicalContainer&& other) = default;
+
         class AscendingIterator {
         private:
             MagicalContainer& container;
@@ -34,7 +39,11 @@ namespace ariel {
         public:
             AscendingIterator(MagicalContainer& cont);
             AscendingIterator(const AscendingIterator& other);
-            ~AscendingIterator();
+            ~AscendingIterator() = default;
+
+            AscendingIterator& operator=(const AscendingIterator& other) = delete;
+            AscendingIterator(AscendingIterator&& other) = default;
+            AscendingIterator& operator=(AscendingIterator&& other) = delete;
 
             AscendingIterator& operator++();
 
@@ -59,7 +68,11 @@ namespace ariel {
         public:
             SideCrossIterator(MagicalContainer& cont);
             SideCrossIterator(const SideCrossIterator& other);
-            ~SideCrossIterator();
+            ~SideCrossIterator() = default;
+
+            SideCrossIterator& operator=(const SideCrossIterator& other) = delete;
+            SideCrossIterator(SideCrossIterator&& other) = default;
+            SideCrossIterator& operator=(SideCrossIterator&& other) = delete;
 
             SideCrossIterator& operator++();
 
@@ -83,7 +96,11 @@ namespace ariel {
         public:
             PrimeIterator(MagicalContainer& cont);
             PrimeIterator(const PrimeIterator& other);
-            ~PrimeIterator();
+            ~PrimeIterator() = default;
+
+            PrimeIterator& operator=(const PrimeIterator& other) = delete;
+            PrimeIterator(PrimeIterator&& other) = default;
+            PrimeIterator& operator=(PrimeIterator&& other) = delete;
 
             PrimeIterator& operator++();
             
