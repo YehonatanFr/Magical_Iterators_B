@@ -12,9 +12,10 @@ namespace ariel {
     class MagicalContainer {
     private:
         std::vector<int> mainElements;
-        std::vector<int> ascElement;
-        std::vector<int> crossElements;
-        std::vector<int> primeElements;
+        std::vector<int*> ascElement;
+        std::vector<int*> crossElements;
+        std::vector<int*> primeElements;
+
 
     public:
         MagicalContainer() = default; 
@@ -25,6 +26,11 @@ namespace ariel {
         int size() const;
         std::vector<int> getElements() const;
 
+        //helpers
+        void addAscElem();
+        void addCrossElem();
+        void addPrimeElem();
+
         MagicalContainer(const MagicalContainer& other) = default;
         MagicalContainer& operator=(const MagicalContainer& other) = default;
         MagicalContainer(MagicalContainer&& other) = default;
@@ -33,7 +39,7 @@ namespace ariel {
         class AscendingIterator {
         private:
             MagicalContainer& container;
-            std::vector<int>::iterator ascIterator;
+            std::vector<int*>::iterator ascIterator;
             size_t index;
 
         public:
@@ -41,7 +47,6 @@ namespace ariel {
             AscendingIterator(const AscendingIterator& other);
             ~AscendingIterator() = default;
 
-            AscendingIterator& operator=(const AscendingIterator& other) = delete;
             AscendingIterator(AscendingIterator&& other) = default;
             AscendingIterator& operator=(AscendingIterator&& other) = delete;
 
@@ -52,6 +57,8 @@ namespace ariel {
             bool operator>(const AscendingIterator& other) const;
             bool operator<(const AscendingIterator& other) const;
 
+            AscendingIterator& operator=(const AscendingIterator& other);
+
             int operator*() const;
 
             AscendingIterator &begin();
@@ -61,16 +68,15 @@ namespace ariel {
         class SideCrossIterator {
         private:
             MagicalContainer& container;
-            std::vector<int>::iterator crossIterator;
+            std::vector<int*>::iterator crossIterator;
             size_t index;
-            bool forward;
+            // bool forward;
 
         public:
             SideCrossIterator(MagicalContainer& cont);
             SideCrossIterator(const SideCrossIterator& other);
             ~SideCrossIterator() = default;
 
-            SideCrossIterator& operator=(const SideCrossIterator& other) = delete;
             SideCrossIterator(SideCrossIterator&& other) = default;
             SideCrossIterator& operator=(SideCrossIterator&& other) = delete;
 
@@ -81,16 +87,21 @@ namespace ariel {
             bool operator>(const SideCrossIterator& other) const;
             bool operator<(const SideCrossIterator& other) const;
 
+            SideCrossIterator& operator=(const SideCrossIterator& other);
+
             int operator*() const;
 
             SideCrossIterator &begin();
             SideCrossIterator &end();
+
+            // bool getForward() const;
+            // void setForward(bool value);
         };
 
         class PrimeIterator {
         private:
             MagicalContainer& container;
-            std::vector<int>::iterator primeIterator;
+            std::vector<int*>::iterator primeIterator;
             size_t index;
 
         public:
@@ -98,7 +109,6 @@ namespace ariel {
             PrimeIterator(const PrimeIterator& other);
             ~PrimeIterator() = default;
 
-            PrimeIterator& operator=(const PrimeIterator& other) = delete;
             PrimeIterator(PrimeIterator&& other) = default;
             PrimeIterator& operator=(PrimeIterator&& other) = delete;
 
@@ -108,6 +118,8 @@ namespace ariel {
             bool operator!=(const PrimeIterator& other) const;
             bool operator>(const PrimeIterator& other) const;
             bool operator<(const PrimeIterator& other) const;
+
+            PrimeIterator& operator=(const PrimeIterator& other);
             
             int operator*() const;
 
