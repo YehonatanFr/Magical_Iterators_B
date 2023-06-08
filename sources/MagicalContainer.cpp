@@ -34,6 +34,8 @@ namespace ariel {
         {
             ascElement.push_back(&(*it));
         }
+
+        sort(ascElement.begin(), ascElement.end(), [](int* a, int* b) {return *a < *b;});
     }
 
     void MagicalContainer::addCrossElem(){
@@ -63,9 +65,6 @@ namespace ariel {
                 primeElements.push_back(&(*it));
             }
         }
-
-        sort(ascElement.begin(), ascElement.end(), [](int* a, int* b) {return *a < *b;});
-
     }
 
     void MagicalContainer::addElement(int element) {
@@ -90,7 +89,7 @@ namespace ariel {
         auto it = find(mainElements.begin(), mainElements.end(), elem);
         if (it == mainElements.end())
         {
-            throw std::runtime_error("Invalid argument");
+            throw runtime_error("Invalid argument");
         }
 
         // Erase the element from mainElements
